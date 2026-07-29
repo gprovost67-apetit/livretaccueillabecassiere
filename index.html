@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
 <title>La Bécassière — Livret d'accueil</title>
 <meta name="theme-color" content="#f5f1e8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,10 +52,18 @@
 
   /* Hero band per section */
   .hero{
-    padding:26px 20px 22px;
+    position:relative;
+    padding:34px 20px 22px;
     background:linear-gradient(160deg,var(--sage) 0%,var(--sage-dark) 100%);
     color:#fff;
+    overflow:hidden;
   }
+  .hero.photo{padding-top:70px;min-height:170px;display:flex;align-items:flex-end;background-size:cover;background-position:center;}
+  .hero.photo::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(44,43,38,.15) 0%,rgba(44,43,38,.75) 100%);
+  }
+  .hero.photo .inner{position:relative;z-index:1;}
   .hero .tag{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.85;font-weight:600;}
   .hero h2{color:#fff;font-size:24px;margin-top:4px;}
   .hero p{color:rgba(255,255,255,.88);margin-top:8px;margin-bottom:0;}
@@ -89,6 +98,30 @@
   .fact .n{font-family:'Playfair Display',serif;font-size:15px;color:var(--sage-dark);font-weight:600;}
   .fact .l{font-size:11px;color:var(--ink-soft);margin-top:2px;text-transform:uppercase;letter-spacing:.06em;}
 
+  .photo-frame{
+    border-radius:var(--radius);overflow:hidden;margin-bottom:14px;border:1px solid var(--line);
+  }
+  .photo-frame img{width:100%;display:block;object-fit:cover;height:150px;}
+
+  .code-box{
+    display:flex;align-items:center;justify-content:space-between;
+    background:var(--stone);border:1px dashed var(--wood);border-radius:12px;
+    padding:12px 16px;margin:10px 0;
+  }
+  .code-box .label{font-size:12.5px;color:var(--ink-soft);font-weight:600;}
+  .code-box .value{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--wood);letter-spacing:.03em;}
+
+  .steps{list-style:none;margin:0;padding:0;}
+  .steps li{
+    display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);
+  }
+  .steps li:last-child{border-bottom:none;}
+  .steps .num{
+    flex:none;width:24px;height:24px;border-radius:50%;background:var(--sage);color:#fff;
+    font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;
+  }
+  .steps .txt{font-size:14.5px;color:var(--ink-soft);line-height:1.5;padding-top:2px;}
+
   /* Accordion */
   details{
     background:var(--card);border:1px solid var(--line);border-radius:14px;
@@ -108,6 +141,9 @@
   details .body{padding:0 16px 16px;color:var(--ink-soft);font-size:14.5px;line-height:1.6;}
   details .body ul{margin:0;padding-left:18px;}
   details .body li{margin-bottom:6px;}
+  details .body p{margin:0 0 10px;}
+  details .body p:last-child{margin-bottom:0;}
+  .price{color:var(--sage-dark);font-weight:700;}
 
   .section-title{
     font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--sage-dark);
@@ -120,15 +156,23 @@
     margin-bottom:16px;
   }
   .contact-card h3{color:#fff;font-size:16px;margin-bottom:6px;}
-  .contact-card p{color:rgba(255,255,255,.82);font-size:14px;margin-bottom:0;}
+  .contact-card p{color:rgba(255,255,255,.82);font-size:14px;margin-bottom:8px;}
+  .contact-card a{color:#fff;font-weight:600;text-decoration:underline;}
 
   .place{
     display:flex;justify-content:space-between;align-items:baseline;
     padding:11px 0;border-bottom:1px solid var(--line);
   }
   .place:last-child{border-bottom:none;}
+  .place .meta{display:flex;flex-direction:column;}
   .place .name{font-weight:600;font-size:14.5px;}
+  .place .cat{font-size:11.5px;color:var(--ink-soft);}
   .place .dist{font-size:12.5px;color:var(--sage-dark);font-weight:600;white-space:nowrap;padding-left:10px;}
+
+  .warn{
+    background:#fbf1e0;border:1px solid #e8cfa0;border-radius:12px;padding:12px 14px;margin-bottom:14px;
+    font-size:13.5px;color:#6b4f1e;line-height:1.5;
+  }
 
   /* Bottom nav */
   nav.tabbar{
@@ -137,14 +181,14 @@
     backdrop-filter:blur(6px);
     border-top:1px solid var(--line);
     display:flex;
-    padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+    padding:6px 2px calc(6px + env(safe-area-inset-bottom));
   }
   nav.tabbar button{
     flex:1;background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;
-    padding:8px 2px;color:#9a9587;font-size:10.5px;font-weight:600;font-family:'Inter',sans-serif;
+    padding:7px 1px;color:#9a9587;font-size:9.5px;font-weight:600;font-family:'Inter',sans-serif;
     cursor:pointer;letter-spacing:.01em;
   }
-  nav.tabbar button .ico{font-size:19px;line-height:1;}
+  nav.tabbar button .ico{font-size:18px;line-height:1;}
   nav.tabbar button.active{color:var(--sage-dark);}
 
   footer.credit{
@@ -167,10 +211,12 @@
 
   <!-- ACCUEIL -->
   <section class="screen active" id="screen-accueil">
-    <div class="hero">
-      <div class="tag">Bienvenue</div>
-      <h2>Bienvenue à la Bécassière</h2>
-      <p>Bonjour à tous, soyez les bienvenus dans notre maison, que nous avons nommée la Bécassière.</p>
+    <div class="hero photo" style="background-image:url('https://res-5.cloudinary.com/bookingsync/image/upload/c_fill,f_auto,fl_progressive,g_center,h_1024,q_auto,w_1536/v1782642587/5ov2_ef168b08-ba85-4523-b729-7f0653dda35d.jpg');">
+      <div class="inner">
+        <div class="tag">Bienvenue</div>
+        <h2>Bienvenue à la Bécassière</h2>
+        <p>2337 Route de Saint Martin, 14600 Genneville</p>
+      </div>
     </div>
     <div class="quick-facts">
       <div class="fact"><div class="n">9</div><div class="l">Voyageurs</div></div>
@@ -181,72 +227,146 @@
     <div class="content">
       <div class="card">
         <h3><span class="ico">🦌</span>Une propriété familiale</h3>
-        <p>Vous êtes ici dans une propriété familiale que nous avons la chance de conserver depuis plus de 45 ans. C'est un véritable havre de paix, où vous pourrez peut-être apercevoir, au petit matin ou à la tombée de la nuit, des biches et des chevreuils qui traversent paisiblement le jardin.</p>
+        <p>Bonjour à tous, soyez les bienvenus dans notre maison, que nous avons la chance de conserver depuis plus de 45 ans. C'est un véritable havre de paix, où vous pourrez peut-être apercevoir, au petit matin ou à la tombée de la nuit, des biches et des chevreuils qui traversent paisiblement le jardin.</p>
         <p>La maison est entourée de bois appartenant à notre famille, où les bécasses trouvent refuge durant l'hiver. Nous apportons régulièrement des améliorations à la maison et au jardin afin de rendre les espaces toujours plus agréables pour nos visiteurs.</p>
       </div>
       <div class="card">
         <h3><span class="ico">📖</span>Comment utiliser ce livret</h3>
-        <p>Utilisez les onglets en bas de l'écran pour retrouver tout ce qu'il faut savoir : la maison et ses extérieurs, le fonctionnement des équipements, le règlement intérieur et nos recommandations aux alentours d'Honfleur.</p>
+        <p>Utilisez les onglets en bas de l'écran : Arrivée (accès, clés, wifi), Maison (jardin, piscine, équipements), Services (room service, poubelles, départ), Règles et Alentours (bonnes adresses près d'Honfleur).</p>
       </div>
+    </div>
+  </section>
+
+  <!-- ARRIVEE -->
+  <section class="screen" id="screen-arrivee">
+    <div class="hero">
+      <div class="tag">Pratique</div>
+      <h2>Arrivée &amp; accès</h2>
+      <p>Adresse, itinéraire, clés et wifi — tout pour bien démarrer votre séjour.</p>
+    </div>
+    <div class="content">
+
+      <div class="card">
+        <h3><span class="ico">📍</span>Adresse</h3>
+        <p>2337 Route de Saint Martin<br>14600 Genneville</p>
+      </div>
+
+      <div class="card">
+        <h3><span class="ico">🚗</span>Accès à la propriété</h3>
+        <ul class="steps">
+          <li><span class="num">1</span><span class="txt">Lorsque vous arrivez à l'entrée du chemin, prenez à droite.</span></li>
+          <li><span class="num">2</span><span class="txt">Continuez sur environ 50 mètres, puis prenez à gauche. Le portail est ouvert.</span></li>
+          <li><span class="num">3</span><span class="txt">Montez le petit chemin, vous apercevrez la maison. Face à la maison, toute la partie à droite du chemin est à la disposition des voyageurs.</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3><span class="ico">🔑</span>Récupération des clés</h3>
+        <p>Une fois face à la maison, vous verrez une fenêtre sur votre gauche : la boîte à clés y est fixée.</p>
+        <div class="code-box">
+          <span class="label">Code boîte à clés</span>
+          <span class="value">3011</span>
+        </div>
+        <p>Le trousseau comprend 2 clés : une pour la porte d'entrée, une pour la porte à l'arrière de la maison. Merci de bien refermer la boîte après avoir récupéré les clés.</p>
+      </div>
+
+      <div class="card">
+        <h3><span class="ico">🅿️</span>Où se garer</h3>
+        <p>Vous pouvez vous garer près de la maison, à droite du chemin.</p>
+      </div>
+
+      <div class="card">
+        <h3><span class="ico">📶</span>Wifi</h3>
+        <div class="code-box">
+          <span class="label">Réseau</span>
+          <span class="value" style="font-size:16px">Livebox-6740</span>
+        </div>
+        <div class="code-box">
+          <span class="label">Mot de passe</span>
+          <span class="value" style="font-size:14px;word-break:break-all;">c6CfkVk5P5fX6DtT34</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <!-- LA MAISON -->
   <section class="screen" id="screen-maison">
-    <div class="hero">
-      <div class="tag">Découvrir</div>
-      <h2>La maison &amp; le jardin</h2>
-      <p>Un petit joyau normand, à vivre pleinement, dedans comme dehors.</p>
+    <div class="hero photo" style="background-image:url('https://res-1.cloudinary.com/bookingsync/image/upload/c_fill,f_auto,fl_progressive,g_center,h_1024,q_auto,w_1536/v1782642581/5ov2_cc8b085d-5d0d-483a-86a4-0e9eb398f7b6.jpg');">
+      <div class="inner">
+        <div class="tag">Découvrir</div>
+        <h2>La maison, le jardin &amp; la piscine</h2>
+      </div>
     </div>
     <div class="content">
       <div class="card">
         <h3><span class="ico">🏡</span>À l'intérieur de la maison</h3>
-        <p>La maison est notre petit joyau : les matériaux sont anciens, et la décoration a été patiemment chinée au fil des années.</p>
-        <p>Dans la salle à manger, vous pourrez admirer notre collection d'aquarelles et de dessins de Honfleur, représentée sous différents points de vue. La cuisine, décorée dans un esprit très naturel, accueille plusieurs natures mortes de fruits.</p>
+        <p>La maison est notre petit joyau : les matériaux sont anciens, et la décoration a été patiemment chinée au fil des années. Dans la salle à manger, vous pourrez admirer notre collection d'aquarelles et de dessins de Honfleur. La cuisine, décorée dans un esprit très naturel, accueille plusieurs natures mortes de fruits.</p>
         <p>Lorsqu'il fait frais, vous apprécierez la chaleur du poêle à bois, parfait pour savourer une tisane ou une boisson fraîche. Profitez du calme absolu de la maison : seuls les oiseaux viendront vous réveiller au petit matin.</p>
       </div>
       <div class="card">
         <h3><span class="ico">🌳</span>Le jardin &amp; les extérieurs</h3>
-        <p>Vous pouvez profiter librement de l'ensemble du jardin : du devant de la maison — où une petite allée en pierre mène vers les bois — jusqu'au bâtiment du chenil (non accessible). Les chiens qui y vivent sont très gentils, mais il est important de ne pas les nourrir, car ils suivent une alimentation stricte qui leur convient parfaitement.</p>
-        <p>Une multitude de mobiliers de jardin est à votre disposition : assemblez-les pour créer une grande table conviviale ou disposez-les selon vos envies. Une plancha et un barbecue sont également à votre disposition pour vous régaler en plein air.</p>
-        <p><em>Nos coins préférés : déjeuner derrière la maison à l'ombre du parasol, et profiter du soleil couchant sur la partie gauche de la maison. À vous de trouver les vôtres.</em></p>
+        <p>Vous disposez du jardin situé côté maison (à droite du chemin en montant vers la propriété). La piscine est privative et le jardin n'est pas partagé — l'espace situé de l'autre côté du chemin appartient au voisin, merci de ne pas y accéder.</p>
+        <p>Une multitude de mobilier de jardin est à votre disposition : assemblez-le pour une grande table conviviale ou disposez-le selon vos envies. Une plancha et un barbecue sont également à votre disposition.</p>
+        <p><em>Nos coins préférés : déjeuner derrière la maison à l'ombre du parasol, et profiter du soleil couchant sur la partie gauche de la maison.</em></p>
       </div>
+
+      <div class="section-title">Piscine chauffée (mai → septembre)</div>
       <div class="card">
-        <h3><span class="ico">🏊</span>La piscine chauffée (mai → septembre)</h3>
-        <p>La piscine est accessible par le petit portillon, qu'il faut toujours refermer afin d'éviter tout accident ou la visite d'un animal curieux qui pourrait tomber dans l'eau.</p>
-        <p>Elle est équipée d'un volet roulant rigide, qui assure la sécurité et conserve la chaleur — les soirées normandes étant souvent fraîches. Merci de refermer le volet chaque soir et de le manipuler avec précaution pour éviter qu'il ne se coince sous le caillebotis.</p>
+        <p>La piscine est chauffée et utilisable de mai à septembre selon la météo. Température de l'eau généralement entre 26°C et 29°C.</p>
+        <div class="warn">⚠️ L'utilisation de la piscine se fait strictement sous la responsabilité des personnes majeures présentes dans le logement. Les enfants et personnes ne sachant pas nager doivent être accompagnés et surveillés en permanence — ne jamais les laisser seuls, même quelques instants.</div>
       </div>
-    </div>
-  </section>
+      <details>
+        <summary><span><span class="ico">🔐</span>Portillon &amp; volet — fermeture obligatoire</span></summary>
+        <div class="body">
+          <p>Le portillon et le volet électrique doivent toujours être refermés après chaque utilisation : cela sécurise l'accès, maintient la température de l'eau et évite que des animaux tombent dans le bassin.</p>
+          <p><strong>Commande du volet :</strong> le bouton noir se trouve sous le porche. Appuyez une fois pour l'ouverture (O) ; restez appuyé jusqu'à fermeture complète pour la fermeture (F).</p>
+          <p>Il est strictement interdit de marcher, s'asseoir ou poser du poids sur le volet — équipement fragile prévu uniquement pour couvrir le bassin. Toute casse ou dégradation pourra faire l'objet d'une demande de dédommagement.</p>
+        </div>
+      </details>
+      <details>
+        <summary><span><span class="ico">🧺</span>Serviettes, robot &amp; bon usage</span></summary>
+        <div class="body">
+          <p>Des serviettes de bain et de la vaisselle en plastique sont à votre disposition — merci de les remettre propres et à leur place. Un robot de nettoyage peut être présent dans la piscine : il est autonome, mais vous pouvez le déposer sur le côté avec précaution si besoin (à remettre ensuite dans l'eau).</p>
+          <ul>
+            <li>Ne rien jeter ni verser dans l'eau, ne pas manger dans la piscine</li>
+            <li>Pas de verre autour du bassin</li>
+            <li>Ne pas laisser le portillon ou le volet ouvert après usage</li>
+            <li>Respecter le calme des lieux</li>
+          </ul>
+        </div>
+      </details>
 
-  <!-- EQUIPEMENTS -->
-  <section class="screen" id="screen-equip">
-    <div class="hero">
-      <div class="tag">Pratique</div>
-      <h2>Fonctionnement des équipements</h2>
-      <p>De quoi utiliser sereinement chaque recoin de la maison.</p>
-    </div>
-    <div class="content">
+      <div class="section-title">Fonctionnement des équipements</div>
 
-      <details open>
+      <details>
         <summary><span><span class="ico">🔥</span>Poêle à bois</span></summary>
         <div class="body"><ul>
-          <li>Utiliser uniquement le bois fourni par la conciergerie.</li>
+          <li>Utiliser uniquement le bois fourni par la conciergerie (jamais de papier en grande quantité, carton, plastique, emballage ou déchet).</li>
           <li>Ouvrir légèrement la trappe d'aération pour faciliter l'allumage.</li>
-          <li>Ne jamais laisser le poêle sans surveillance lorsqu'il est en fonctionnement.</li>
+          <li>Ne jamais laisser le poêle sans surveillance — ni quitter la maison, ni aller dormir, feu allumé.</li>
           <li>Toujours refermer la vitre correctement pour éviter les projections.</li>
           <li>Les cendres doivent rester dans le poêle ; nous nous chargeons du nettoyage.</li>
         </ul></div>
       </details>
 
       <details>
+        <summary><span><span class="ico">🍢</span>Plancha &amp; barbecue</span></summary>
+        <div class="body"><ul>
+          <li>À utiliser uniquement en extérieur, sur une surface stable, dégagée et éloignée de tout élément inflammable — jamais près de la piscine, du volet ou de la maison.</li>
+          <li>Ne jamais laisser sans surveillance lorsqu'ils sont allumés ou encore chauds.</li>
+          <li>Vérifier qu'ils sont bien éteints et refroidis, puis nettoyer plancha, grille et ustensiles après usage.</li>
+        </ul></div>
+      </details>
+
+      <details>
         <summary><span><span class="ico">🍳</span>Cuisine &amp; électroménager</span></summary>
         <div class="body"><ul>
-          <li>Plaques de cuisson : fonctionnement classique, les boutons sont situés en façade.</li>
+          <li>Plaques de cuisson : fonctionnement classique, boutons en façade.</li>
           <li>Four : préchauffage recommandé pour une cuisson homogène.</li>
-          <li>Lave-vaisselle : merci de le faire tourner en fin de séjour si vous l'avez utilisé.</li>
-          <li>Réfrigérateur / congélateur : ne pas laisser la porte ouverte trop longtemps pour éviter la condensation.</li>
-          <li>Bouilloire, grille-pain, cafetière : utilisation intuitive, appareils situés sur le plan de travail.</li>
+          <li>Lave-vaisselle : merci de le faire tourner en fin de séjour si utilisé.</li>
+          <li>Réfrigérateur / congélateur : ne pas laisser la porte ouverte trop longtemps.</li>
+          <li>Bouilloire, grille-pain, cafetière sur le plan de travail.</li>
         </ul></div>
       </details>
 
@@ -259,30 +379,9 @@
       </details>
 
       <details>
-        <summary><span><span class="ico">🏊</span>Piscine &amp; volet roulant</span></summary>
-        <div class="body"><ul>
-          <li>Accès par le portillon : toujours le refermer.</li>
-          <li>Le volet roulant doit être fermé chaque soir pour la sécurité et la conservation de la chaleur.</li>
-          <li>Manipuler le bouton d'ouverture/fermeture doucement pour éviter que le volet ne se coince sous le caillebotis.</li>
-          <li>Ne jamais marcher sur le volet.</li>
-        </ul></div>
-      </details>
-
-      <details>
-        <summary><span><span class="ico">🍢</span>Plancha &amp; barbecue</span></summary>
-        <div class="body"><ul>
-          <li>À utiliser uniquement en extérieur, sur une surface stable.</li>
-          <li>Toujours nettoyer la plancha après usage (une spatule et du papier absorbant suffisent).</li>
-          <li>Vérifier que le barbecue est totalement éteint avant de le laisser sans surveillance.</li>
-          <li>Ne jamais utiliser d'alcool à brûler.</li>
-        </ul></div>
-      </details>
-
-      <details>
         <summary><span><span class="ico">💡</span>Électricité &amp; éclairages</span></summary>
         <div class="body"><ul>
-          <li>Les interrupteurs sont situés à l'entrée de chaque pièce.</li>
-          <li>Merci d'éteindre les lumières lorsque vous quittez une pièce ou la maison.</li>
+          <li>Interrupteurs situés à l'entrée de chaque pièce ; merci d'éteindre en quittant une pièce.</li>
           <li>En cas de coupure, le tableau électrique se trouve dans la chambre du rez-de-jardin.</li>
         </ul></div>
       </details>
@@ -290,26 +389,106 @@
       <details>
         <summary><span><span class="ico">🌬️</span>Chauffage &amp; aération</span></summary>
         <div class="body"><ul>
-          <li>La maison est ancienne : elle respire. Aérer quelques minutes chaque matin permet de conserver une atmosphère saine.</li>
+          <li>La maison est ancienne : aérer quelques minutes chaque matin permet de conserver une atmosphère saine.</li>
           <li>Le chauffage est réglé pour votre confort ; merci de ne pas modifier les réglages sans nécessité.</li>
-        </ul></div>
-      </details>
-
-      <details>
-        <summary><span><span class="ico">📶</span>Wi-Fi &amp; multimédia</span></summary>
-        <div class="body"><ul>
-          <li>Le code Wi-Fi se trouve sur la box Internet.</li>
-          <li>Merci de ne pas débrancher la box ou les équipements connectés.</li>
         </ul></div>
       </details>
 
       <details>
         <summary><span><span class="ico">💧</span>Eau &amp; salle de bain</span></summary>
         <div class="body"><ul>
-          <li>L'eau chaude met parfois quelques secondes à arriver : c'est normal dans une maison ancienne.</li>
+          <li>L'eau chaude met parfois quelques secondes à arriver : normal dans une maison ancienne.</li>
           <li>Merci de ne pas jeter de lingettes, protections ou objets dans les toilettes.</li>
         </ul></div>
       </details>
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="screen" id="screen-services">
+    <div class="hero">
+      <div class="tag">Pendant le séjour</div>
+      <h2>Services &amp; conciergerie</h2>
+      <p>Room service, bien-être, poubelles et infos de départ.</p>
+    </div>
+    <div class="content">
+
+      <div class="section-title">Room service — à commander la veille</div>
+
+      <details open>
+        <summary><span><span class="ico">🥐</span>Petit déjeuner</span> <span class="price">15€/pers</span></summary>
+        <div class="body"><p>Jus d'orange bio, sélection de confitures, miel, beurre, Nutella, yaourt nature, croissant et baguette tradition. Livraison tous les jours de 8h45 à 11h00 dans un panier devant votre porte.</p></div>
+      </details>
+      <details>
+        <summary><span><span class="ico">🦞</span>Plateau de fruits de mer</span> <span class="price">35€/pers</span></summary>
+        <div class="body"><p>5 huîtres, langoustines, crevettes, bulots, gambas, un demi-tourteau, beurre, citron, mayonnaise et baguette. Disponible tous les jours sauf le lundi (produits selon arrivage).</p></div>
+      </details>
+      <details>
+        <summary><span><span class="ico">🧀</span>Planche campagnarde</span> <span class="price">35€/2 pers</span></summary>
+        <div class="body"><p>Charcuterie et fromages de qualité, beurre frais et baguette tradition. Disponible tous les jours sauf lundi et mardi.</p></div>
+      </details>
+      <details>
+        <summary><span><span class="ico">❤️</span>Accueil romantique</span> <span class="price">49€</span></summary>
+        <div class="body"><p>Bouteille de Champagne (75cl) et pétales de roses sur le lit à votre arrivée. Personnalisation possible sur demande.</p></div>
+      </details>
+      <details>
+        <summary><span><span class="ico">🔥</span>Kit de bois pour cheminée</span> <span class="price">35€</span></summary>
+        <div class="body"><p>Allume-feu, petit bois et bûches — tout pour allumer et entretenir un feu de cheminée.</p></div>
+      </details>
+      <details>
+        <summary><span><span class="ico">🍼</span>Lit bébé</span> <span class="price">dès 12€/nuit</span></summary>
+        <div class="body"><p>15€/nuit pour 1 à 2 nuits, 12€/nuit à partir de 3 nuits. Lit parapluie avec matelas, alèse imperméable et drap coton, installé dans la pièce de votre choix.</p></div>
+      </details>
+      <details>
+        <summary><span><span class="ico">🧳</span>Bagagerie</span> <span class="price">10€/jour</span></summary>
+        <div class="body"><p>Déposez vos bagages (non alimentaires) à l'agence avant check-in ou après check-out.</p></div>
+      </details>
+      <details>
+        <summary><span><span class="ico">🛁</span>Linge de toilette supplémentaire</span> <span class="price">15€</span></summary>
+        <div class="body"><p>Deux grandes serviettes, deux petites serviettes, un essuie-main et un tapis de bain.</p></div>
+      </details>
+      <details>
+        <summary><span><span class="ico">🧹</span>Ménage mi-séjour</span> <span class="price">selon logement</span></summary>
+        <div class="body"><p>Changement du linge de lit et des serviettes, nettoyage complet du logement en cours de séjour.</p></div>
+      </details>
+
+      <div class="section-title">Bien-être</div>
+      <div class="card">
+        <h3><span class="ico">💆</span>Massages &amp; soins</h3>
+        <p>« Il n'existe qu'un seul massage : le vôtre ! » Un massage intuitif composé pour vous — énergie, émotion et bienveillance. Une équipe de professionnelles se déplace sur le lieu de votre séjour.</p>
+      </div>
+
+      <div class="section-title">Poubelles &amp; tri</div>
+      <div class="card">
+        <h3><span class="ico">🗑️</span>Où déposer les déchets ?</h3>
+        <ul>
+          <li>Bacs situés à Quetteville, au carrefour de la route de la Côte Ransue et de la route de Genneville</li>
+          <li>Conteneurs de tri à l'entrée de Genneville</li>
+        </ul>
+        <p style="margin-top:10px;"><strong>Camion de collecte :</strong> passage le jeudi. Les déchets ménagers peuvent être déposés uniquement le jeudi devant le Manoir, à côté de la poubelle grise (pas de sacs les autres jours).</p>
+        <p>La poubelle de la cuisine a un double bac pour séparer déchets ménagers / cartons / verre.</p>
+      </div>
+
+      <div class="section-title">Votre départ</div>
+      <div class="card">
+        <h3><span class="ico">🚪</span>Avant de partir</h3>
+        <ul>
+          <li>Fermer les fenêtres et la porte</li>
+          <li>Retirer et rassembler le linge de lit et de toilette</li>
+          <li>Ranger la vaisselle propre dans les placards</li>
+          <li>Vider intégralement le réfrigérateur</li>
+          <li>Enlever l'intégralité de vos ordures ménagères</li>
+          <li>Faire un tour dans la location — les oublis sont fréquents !</li>
+        </ul>
+        <p style="margin-top:10px;">Le ménage est inclus. Merci d'envoyer un mail à <a href="mailto:contact@conciergerie-remigriffoul.com" style="color:var(--sage-dark);font-weight:600;">contact@conciergerie-remigriffoul.com</a> pour confirmer votre départ.</p>
+      </div>
+
+      <div class="contact-card">
+        <h3>Venez à notre rencontre 🙂</h3>
+        <p>Notre agence est au 5 rue des Lingots à Honfleur, à 30 secondes de la place Sainte-Catherine. N'hésitez pas à venir nous voir !</p>
+        <p style="margin-bottom:0;"><a href="mailto:contact@conciergerie-remigriffoul.com">contact@conciergerie-remigriffoul.com</a></p>
+      </div>
 
     </div>
   </section>
@@ -323,6 +502,8 @@
     </div>
     <div class="content">
 
+      <div class="warn">🚭 Logement non-fumeur · 🎉 Fêtes non autorisées · 🤫 Calme demandé après 22h</div>
+
       <details open>
         <summary><span><span class="ico">🌿</span>Respect du lieu</span></summary>
         <div class="body"><ul>
@@ -332,18 +513,26 @@
       </details>
 
       <details>
+        <summary><span><span class="ico">🚧</span>Espaces privatifs</span></summary>
+        <div class="body">
+          <p>Vous disposez du jardin situé côté maison, à droite du chemin lorsque vous montez vers la propriété. La piscine est privative et le jardin n'est pas partagé.</p>
+          <p>L'espace situé de l'autre côté du chemin appartient au voisin — merci de ne pas y accéder et de bien rester dans les espaces réservés à la maison.</p>
+        </div>
+      </details>
+
+      <details>
         <summary><span><span class="ico">🐾</span>Chiens &amp; chenil</span></summary>
         <div class="body"><ul>
-          <li>Ne pas nourrir les chiens — ils suivent une alimentation stricte.</li>
-          <li>Le bâtiment du chenil n'est pas accessible aux visiteurs.</li>
-          <li>Merci de ne pas entrer dans l'enclos et de ne pas laisser les enfants s'en approcher sans surveillance.</li>
+          <li>Des chiens peuvent être présents sur la propriété, dans un espace qui leur est réservé — ne jamais les nourrir (alimentation stricte, certains aliments peuvent être dangereux).</li>
+          <li>Le bâtiment du chenil et son enclos ne sont pas accessibles aux visiteurs : ne pas y entrer, ne pas ouvrir les portes ou portillons.</li>
+          <li>Ne jamais laisser les enfants s'approcher du chenil sans la surveillance d'un adulte.</li>
         </ul></div>
       </details>
 
       <details>
         <summary><span><span class="ico">🌳</span>Jardin &amp; extérieurs</span></summary>
         <div class="body"><ul>
-          <li>Vous pouvez disposer les tables et chaises comme vous le souhaitez, puis les remettre à l'abri en cas de pluie ou de vent.</li>
+          <li>Disposez les tables et chaises comme vous le souhaitez, puis remettez-les à l'abri en cas de pluie ou de vent.</li>
           <li>Les bois et le jardin abritent de nombreux animaux : merci de rester discrets et de ne pas laisser de déchets.</li>
         </ul></div>
       </details>
@@ -351,25 +540,24 @@
       <details>
         <summary><span><span class="ico">🏊</span>Piscine chauffée (mai → septembre)</span></summary>
         <div class="body"><ul>
-          <li>Le portillon doit être refermé systématiquement.</li>
-          <li>Le volet doit être fermé chaque soir et manipulé avec précaution pour éviter qu'il ne se coince sous le caillebotis.</li>
-          <li>Les enfants doivent être surveillés en permanence autour de la piscine.</li>
+          <li>Portillon refermé systématiquement ; volet fermé chaque soir et manipulé avec précaution.</li>
+          <li>Enfants surveillés en permanence autour de la piscine.</li>
+          <li>Ne pas marcher, s'asseoir ou jouer sur le volet.</li>
         </ul></div>
       </details>
 
       <details>
         <summary><span><span class="ico">🔥</span>Plancha, barbecue &amp; feu</span></summary>
         <div class="body"><ul>
-          <li>Merci d'utiliser la plancha et le barbecue en extérieur uniquement, sur une surface stable et dégagée.</li>
-          <li>Assurez-vous qu'ils soient bien éteints après usage.</li>
-          <li>Le poêle à bois peut être utilisé en cas de fraîcheur, mais uniquement avec le bois fourni.</li>
+          <li>Utilisation en extérieur uniquement, sur une surface stable et dégagée ; bien éteints après usage.</li>
+          <li>Le poêle à bois peut être utilisé en cas de fraîcheur, uniquement avec le bois fourni.</li>
         </ul></div>
       </details>
 
       <details>
         <summary><span><span class="ico">🗑️</span>Déchets &amp; tri</span></summary>
         <div class="body"><ul>
-          <li>Merci de respecter les consignes de tri sélectif (verre, recyclables, ordures ménagères).</li>
+          <li>Respecter les consignes de tri sélectif (verre, recyclables, ordures ménagères).</li>
           <li>Ne rien laisser dehors pour éviter d'attirer les animaux.</li>
         </ul></div>
       </details>
@@ -377,7 +565,7 @@
       <details>
         <summary><span><span class="ico">🤫</span>Calme &amp; voisinage</span></summary>
         <div class="body"><ul>
-          <li>La Bécassière est un lieu paisible : merci de préserver la tranquillité du voisinage, surtout le soir.</li>
+          <li>La Bécassière est un lieu paisible : préservez la tranquillité du voisinage, surtout le soir.</li>
           <li>La musique en extérieur doit rester modérée.</li>
         </ul></div>
       </details>
@@ -387,10 +575,11 @@
 
   <!-- ALENTOURS -->
   <section class="screen" id="screen-alentours">
-    <div class="hero">
-      <div class="tag">Aux alentours</div>
-      <h2>Honfleur &amp; la Normandie</h2>
-      <p>Idéalement placée pour rayonner sur la Côte Fleurie et le Pays d'Auge.</p>
+    <div class="hero photo" style="background-image:url('https://res-2.cloudinary.com/bookingsync/image/upload/c_fill,f_auto,fl_progressive,g_center,h_1024,q_auto,w_1536/v1782642595/5ov2_5d81e887-f338-48e6-94e0-ab202cab3417.jpg');">
+      <div class="inner">
+        <div class="tag">Aux alentours</div>
+        <h2>Honfleur &amp; la Normandie</h2>
+      </div>
     </div>
     <div class="content">
       <div class="card">
@@ -399,6 +588,13 @@
         <div class="place"><span class="name">Pont-l'Évêque</span><span class="dist">15 min</span></div>
         <div class="place"><span class="name">Deauville / Trouville</span><span class="dist">Côte Fleurie</span></div>
         <div class="place"><span class="name">Paris (Porte Maillot)</span><span class="dist">≈ 2h via l'A14</span></div>
+      </div>
+      <div class="card">
+        <h3><span class="ico">👍</span>Nos recommandations</h3>
+        <div class="place"><div class="meta"><span class="name">E.Leclerc Honfleur</span><span class="cat">Essentiel</span></div><span class="dist">6.12 km</span></div>
+        <div class="place"><div class="meta"><span class="name">Casino Shop</span><span class="cat">Essentiel</span></div><span class="dist">7.22 km</span></div>
+        <div class="place"><div class="meta"><span class="name">Chez D.D.</span><span class="cat">Bars &amp; Restaurants</span></div><span class="dist">7.29 km</span></div>
+        <div class="place"><div class="meta"><span class="name">L'Endroit</span><span class="cat">Bars &amp; Restaurants</span></div><span class="dist">7.33 km</span></div>
       </div>
       <div class="card">
         <h3><span class="ico">🍽️</span>À faire &amp; à voir</h3>
@@ -411,8 +607,9 @@
         </ul>
       </div>
       <div class="contact-card">
-        <h3>Besoin d'aide sur place ?</h3>
-        <p>Pour toute question durant votre séjour (ménage, équipement, urgence), contactez la conciergerie qui vous a transmis vos codes d'arrivée.</p>
+        <h3>Votre prochain séjour ?</h3>
+        <p>Retrouvez l'intégralité de nos logements et réservez en quelques clics avec la garantie du meilleur tarif sur conciergerie-remigriffoul.com</p>
+        <p style="margin-bottom:0;">Besoin d'aide sur place ? <a href="mailto:contact@conciergerie-remigriffoul.com">contact@conciergerie-remigriffoul.com</a></p>
       </div>
     </div>
   </section>
@@ -421,8 +618,9 @@
 
 <nav class="tabbar" id="tabbar">
   <button class="active" data-target="screen-accueil"><span class="ico">🦌</span>Accueil</button>
+  <button data-target="screen-arrivee"><span class="ico">🔑</span>Arrivée</button>
   <button data-target="screen-maison"><span class="ico">🏡</span>Maison</button>
-  <button data-target="screen-equip"><span class="ico">🛠️</span>Équipements</button>
+  <button data-target="screen-services"><span class="ico">🛎️</span>Services</button>
   <button data-target="screen-regles"><span class="ico">📋</span>Règles</button>
   <button data-target="screen-alentours"><span class="ico">📍</span>Alentours</button>
 </nav>
